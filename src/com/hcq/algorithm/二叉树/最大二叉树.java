@@ -29,27 +29,33 @@ import com.hcq.algorithm.DTO.TreeNode;
  */
 public class 最大二叉树 {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
-        return construct(0, nums.length, nums);
+        return construct(0, nums.length - 1, nums);
     }
 
-    private TreeNode construct(int start, int end, int[] nums) {
-        if (start > end) {
+    private TreeNode construct(int lo, int hi, int[] nums) {
+        if (lo > hi) {
             return null;
         }
         //获取root，最大的值
         int maxIndex = -1;
         int maxVal = Integer.MIN_VALUE;
-        for (int i = start; i < end; i++) {
-            if (maxIndex < nums[i]) {
+        for (int i = lo; i <= hi; i++) {
+            if (maxVal < nums[i]) {
                 maxIndex = i;
                 maxVal = nums[i];
             }
         }
         TreeNode root = new TreeNode(maxVal);
         //遍历root左边
-        root.left = construct(start, maxIndex - 1, nums);
+        root.left = construct(lo, maxIndex - 1, nums);
         //遍历root右边
-        root.right = construct(maxIndex + 1, end, nums);
+        root.right = construct(maxIndex + 1, hi, nums);
         return root;
+    }
+
+    public static void main(String[] args) {
+        最大二叉树 z = new 最大二叉树();
+        TreeNode treeNode = z.constructMaximumBinaryTree(new int[]{3, 2, 1, 6, 0, 5});
+        System.out.println(treeNode);
     }
 }

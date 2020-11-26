@@ -1,0 +1,8 @@
+  if(到底){
+      res = list.add(select)
+    }
+  for(选择:所有可选项){
+      做选择
+      backTrace()
+      removeSelect
+    }
